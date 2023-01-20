@@ -1,0 +1,501 @@
+/* Add gratitude button and text screen   */
+.cards-space-affirmation {
+  width: 18 rem;
+  margin-top: 20 px !important;
+  cursor: pointer;
+}
+.menu-option {
+  position: absolute;
+  top: -5px;
+  right: 11px;
+  padding-top: 9px;
+  height: 40px;
+  width: 40px;
+  border-radius: 50px;
+  /* background-color: var(--portal-theme-secondary); */
+}
+.support-ticket-button-outlined {
+  background-color: #1c1c1c;
+  background-color: var(--button-background-color);
+  padding: 4px 16px;
+  color: #fff;
+  color: var(--input-text-color);
+  border-radius: 5px;
+  border: 1px solid #f6bd4b;
+  border: 1px solid var(--button-outlined-color);
+}
+.support-ticket-button-contained {
+  background-color: #1c1c1c;
+  background-color: var(--button-background-color);
+  padding: 4px 16px;
+  color: #f6bd4b;
+  color: var(--button-text-color);
+  border-radius: 5px;
+  border: 1px solid #f6bd4b;
+  border: 1px solid var(--button-outlined-color);
+}
+.open-ticket-color {
+  background-color: #007bff;
+  border-color: #007bff;
+  width: 85px;
+}
+.solved-ticket-color {
+  background-color: #28a745;
+  border-color: #28a745;
+}
+.waiting-ticket-color {
+  background-color: #ffc107d9;
+  color: #fff;
+  color: var(--input-text-color);
+  border-color: #ffc107d9;
+  width: 85px;
+}
+.suppor-ticket-data-table .MuiDataGrid-columnHeaders {
+  color: #f6bd4b !important;
+  color: var(--portal-theme-primary) !important;
+}
+.MuiDataGrid-iconSeparator {
+  display: none !important;
+}
+.suppor-ticket-data-table,
+.suppor-ticket-data-table .MuiDataGrid-columnHeaders {
+  border: 2px solid rgb(116, 115, 115) !important;
+}
+.data-table .MuiDataGrid-cell,
+.css-1sstdvt-MuiDataGrid-columnHeaders {
+  border-bottom: 1px solid rgb(116, 115, 115) !important;
+}
+
+.data-table,
+.lesson-card,
+.payment-card {
+  color: #fff;
+  color: var(--text-primary-color);
+}
+/* chartCard */
+/* chat style Support Tickets*/
+.chat-main-card {
+  background-color: transparent;
+  box-shadow: none;
+  color: var(--text-primary-color);
+}
+.chat-main-card .card-title {
+  color: var(--portal-theme-primary);
+}
+.chat-title-head {
+  border-right: 1px solid gray;
+  border-bottom: 1px solid gray;
+}
+.chat-message-head {
+  border-bottom: 1px solid gray;
+}
+.chat-title-body {
+  border-right: 1px solid gray;
+}
+/* .chat-message-box {
+  background-color: var(--background-primary-color) !important;
+} */
+.chat-message-body {
+  /* background-color: rgba(158, 163, 161, 0.08) !important; */
+  /* border-top: 1px solid #282727; */
+  width: 100%;
+  position: relative;
+}
+.custom-popover-box .remove-border {
+  right: 5px;
+  width: 30px;
+  position: absolute;
+  top: 40px;
+}
+.chat-side-bar {
+  padding-right: 0 !important;
+}
+.chat-title-body:hover {
+  background-color: rgba(158, 163, 161, 0.08) !important;
+  cursor: pointer;
+}
+.support-ticket-button-outlined {
+  background-color: var(--button-background-color);
+  padding: 4px 16px;
+  color: var(--input-text-color);
+  border-radius: 5px;
+  border: 1px solid var(--button-outlined-color);
+}
+.open-ticket-color {
+  background-color: #007bff;
+  color: var(--input-text-color);
+  border-color: #007bff;
+  width: 85px;
+}
+.solved-ticket-color {
+  background-color: #28a745;
+  color: var(--input-text-color);
+  border-color: #28a745;
+  width: 85px;
+}
+/* .waiting-ticket-color {
+  background-color: #ffc107;
+  color: var(--input-text-color);
+  border-color: #ffc107;
+} */
+
+.trash-ticket-color {
+  background-color: rgb(175, 25, 25);
+  color: var(--input-text-color);
+  border-color: rgb(175, 25, 25);
+  width: 85px;
+}
+.support-ticket-button-contained {
+  background-color: var(--button-background-color);
+  padding: 4px 16px;
+  color: var(--button-text-color);
+  border-radius: 5px;
+  border: 1px solid var(--button-outlined-color);
+}
+.css-qen1a1-MuiDataGrid-root .MuiDataGrid-cell:focus,
+.css-rvx2y1 .MuiDataGrid-cell:focus,
+.css-rvx2y1 .MuiDataGrid-columnHeader:focus {
+  outline: none;
+}
+.suppor-ticket-data-table .MuiDataGrid-row {
+  cursor: pointer;
+}
+.suppor-ticket-data-table .MuiDataGrid-columnHeaders {
+  border: 2px solid var(--portal-theme-secondary) !important;
+  color: var(--portal-theme-primary) !important;
+}
+.suppor-ticket-data-table {
+  border: 2px solid var(--portal-theme-secondary) !important;
+}
+.suppor-ticket-data-table .MuiDataGrid-iconSeparator {
+  cursor: pointer;
+}
+.circle-image img {
+  border-radius: 100%;
+  padding: 9px;
+  width: 60px;
+  height: 60px;
+  z-index: 1;
+  cursor: pointer;
+}
+.upload-button label {
+  text-align: center !important;
+  background-color: var(--portal-theme-secondary);
+  padding: 15px;
+  color: var(--portal-theme-primary);
+  border-radius: 5px;
+  cursor: pointer;
+  height: 76px;
+  width: 76px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.preview span {
+  position: absolute;
+  right: 3px;
+  top: -10px;
+  font-size: 13px;
+  font-weight: 700;
+  height: 20px;
+  z-index: 1;
+  background-color: red;
+  width: 20px;
+  color: #fff;
+  text-align: center;
+  border-radius: 10px;
+}
+.preview img {
+  height: 76px;
+  width: 76px;
+  border-radius: 5px;
+  margin-right: 10px;
+  display: inline;
+}
+.add-photo .preview span,
+.add-memories-preview .preview span {
+  top: -35px;
+}
+.preview span:hover {
+  cursor: pointer;
+}
+.preview {
+  position: relative;
+}
+.css-cdr993-MuiTablePagination-root,
+.css-1fki5np {
+  color: var(--input-text-color);
+}
+.preview span {
+  position: absolute;
+  right: 3px;
+  top: -10px;
+  font-size: 13px;
+  font-weight: bold;
+  height: 20px;
+  background-color: red;
+  width: 20px;
+  color: #fff;
+  text-align: center;
+  border-radius: 10px;
+}
+.circle-image .set-title-width span {
+  color: var(--text-primary-color);
+}
+.circle-image .MuiAvatar-root {
+  width: 60px;
+  height: 60px;
+}
+
+/* chartCard */
+.cursor {
+  cursor: pointer;
+}
+.pods-cards-shadow {
+  box-shadow: 0 0 2px 0 rgb(0 3 82 / 24%), 0 16px 32px -4px rgb(0 3 82 / 24%);
+  border-radius: 16px;
+  margin: -2px;
+  background-color: var(--sidebars-background-color);
+}
+.h2-heading {
+  color: var(--portal-theme-primary);
+}
+.modalIcon {
+  cursor: pointer;
+}
+.edit-profile-icon {
+  position: relative;
+}
+.edit-profile-icon img {
+  border-radius: 50px;
+}
+.edit-profile-icon-position {
+  position: absolute;
+  right: -10px;
+  top: 66px;
+}
+.pods-active-members {
+  font-size: 14px;
+  font-weight: 600;
+  margin-top: 5px;
+  margin-bottom: -20px !important;
+  color: #858585;
+}
+.pods-image {
+  border-top-right-radius: 16px;
+  border-top-left-radius: 16px;
+}
+.memory-heading {
+  padding-top: -1px !important;
+}
+.margin-quotes {
+  margin-bottom: 30px !important;
+}
+
+.padding-screen {
+  padding-left: 12px;
+  padding-right: 24px;
+  /* padding-top: 7px; */
+}
+.programs-details {
+  float: left;
+}
+.download-button {
+  border-radius: 100px;
+  background-color: #1a93a9;
+  width: 28px;
+  height: 28px;
+  margin-left: auto;
+  margin-top: 5px;
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+}
+.chat-main-card {
+  /* background-color: var(--background-primary-color) !important; */
+  box-shadow: none;
+  color: var(--input-text-color);
+  color: var(--text-primary-color);
+}
+.css-1mav5hp-MuiPaper-root-MuiDrawer-paper {
+  background-color: var(--sidebars-background-color);
+}
+.programme-card-desc-muted {
+  position: relative;
+}
+.recording-card-date {
+  position: absolute;
+  width: 100%;
+  bottom: 20px;
+}
+.menu-background-circle {
+  height: 35px;
+  width: 35px;
+  border-radius: 51px;
+  background-color: var(--portal-theme-secondary);
+}
+.div-style {
+  border-bottom: 1px solid rgb(202, 202, 202);
+  /* border-radius: 10px; */
+  padding: 8px;
+}
+.div-style p {
+  margin: 0 !important;
+  padding-top: 8px;
+}
+.upload-image-add-program {
+  width: 450px;
+  margin-left: 12px;
+}
+.custom-video-player iframe {
+  height: 100% !important;
+}
+.cards-edit {
+  width: 850px;
+  background-color: var(--background-secondary-color);
+  border: none;
+  cursor: pointer;
+  transition: all 0.5s;
+  box-shadow: 0 0 2px 0 rgb(0 3 82 / 24%), 0 16px 32px -4px rgb(0 3 82 / 24%);
+}
+/* Community  */
+.profile-cards {
+  background-color: var(--background-secondary-color);
+  border: none;
+  cursor: pointer;
+  transition: all 0.5s;
+  box-shadow: 0 0 2px 0 rgb(0 3 82 / 24%), 0 16px 32px -4px rgb(0 3 82 / 24%);
+  border-radius: 10px;
+  min-height: 170px;
+}
+.profile-buttons {
+  padding-left: 200px;
+}
+.profile-bg {
+  position: relative;
+}
+.profile-image {
+  position: absolute;
+  bottom: -30px;
+  left: 30px;
+  border-radius: 5px;
+}
+.profile-image img {
+  border: 5px solid #fff;
+  width: 120px;
+  height: 120px;
+  border-radius: 5px;
+}
+
+.profile-name {
+  margin-left: 50px;
+  margin-top: 30px;
+}
+.poster-name .card-title {
+  font-weight: 600;
+}
+.profile-cards .new-memories label {
+  font-size: 14px;
+  color: var(--text-secondary-color);
+}
+.profile-cards .new-memories textarea {
+  font-size: 14px;
+}
+.poster-name .date-color {
+  font-size: 12px !important;
+}
+.profile-ticket-button-contained {
+  background-color: var(--button-outlined-color);
+  padding: 4px 16px;
+  color: var(--input-text-color);
+  border-radius: 5px;
+  border: 1px solid var(--button-outlined-color);
+  cursor: pointer;
+}
+
+.profile-ticket-button-outlined {
+  background-color: var(--button-background-color);
+  padding: 4px 16px;
+  color: var(--input-text-color);
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+.profile-gallery-photo img {
+  border-radius: 5px;
+}
+.avatar-group .MuiAvatar-circular {
+  width: 30px;
+  height: 30px;
+  font-size: 12px;
+}
+.comment-icon .svg-color svg {
+  width: 20px;
+}
+.comment-image img {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  z-index: 1;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+.twiter-links a {
+  text-decoration: none;
+  color: var(--portal-theme-primary);
+}
+.profile-bars {
+  position: absolute;
+  right: 0px;
+  display: none;
+}
+
+.profile-cards .date-color {
+  font-weight: 400 !important;
+}
+
+.comment-submit-button {
+  text-align: center;
+  /* background-image: url(../images/btn-img.png); */
+  background-color: var(--button-background-color);
+  border: 1px solid var(--button-outlined-color);
+  color: var(--button-text-color);
+  padding: 4px 15px;
+  border-radius: 5px;
+  margin-bottom: 12px;
+}
+.reduce-margin-from-para {
+  margin-bottom: 5px;
+}
+button.disabled:hover {
+  cursor: not-allowed;
+}
+.date-color {
+  color: #969696 !important;
+  color: var(--text-secondary-color) !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+}
+
+@media only screen and (max-width: 769px) {
+  .cards-space-affirmation {
+    width: 18rem;
+    margin-top: 20px;
+    margin-left: 65px;
+  }
+  .profile-gallery-photo {
+    padding: 5px;
+    margin-top: 5px !important;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .profile-tabs {
+    display: none;
+  }
+  .profile-bars {
+    display: block;
+  }
+}
+/* Community end */

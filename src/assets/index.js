@@ -1,0 +1,58 @@
+// App logo undraw_no_data_re_kwbl
+export { default as appLogoIcon } from "./images/app_logo.png";
+export { default as pgiLogo } from "./images/pgi_logo.png";
+export { default as pgiFav } from "./images/pgi_fav.png";
+export { default as appLogoIcon2 } from "./images/app_logo_old.png";
+export { default as danielleLogo } from "./images/danielle_fav_logo.png";
+export { default as danielleSidebarLogo } from "./images/danielle_sidebar_logo.png";
+export { default as hinaKhanLogo } from "./images/HK_logo.png";
+export { default as checkList } from "./images/check-list.png";
+export { default as menOne } from "./images/menOne.png";
+export { default as menTwo } from "./images/menTwo.png";
+export { default as noTask } from "./images/undraw_no_data_re_kwbl.svg";
+export { default as word } from "./images/wordSoft.png";
+export { default as pdf } from "./images/pdfSoft.png";
+export { default as room1 } from "./images/room1.jpg";
+export { default as room2 } from "./images/room2.jpg";
+export { default as room3 } from "./images/room3.png";
+export { default as PodsIcons } from "./images/sidebar-icons/Pods.png";
+export { default as GoalStatmentIcons } from "./images/sidebar-icons/Goal_Statment.png";
+export { default as DashboardIcons } from "./images/sidebar-icons/dashboard.png";
+export { default as RecordingIcons } from "./images/sidebar-icons/Vault.png";
+export { default as no_data_found } from "./images/no_data_found.png";
+export { default as csvImage } from "./images/icons/csv.png";
+export { default as docImage } from "./images/icons/doc.png";
+export { default as pdfImage } from "./images/icons/pdf.png";
+export { default as wordImage } from "./images/icons/doc.png";
+export { default as xlsxImage } from "./images/icons/xls.png";
+export { default as audioImage } from "./images/icons/mp3.png";
+export { default as otherImage } from "./images/icons/other.png";
+// community
+export { default as profileBg } from "./images/profile-bg.jpg";
+export { default as profileImage } from "./images/profile-image.jpeg";
+export { default as feedImage } from "./images/feed-image.jpg";
+export { default as gallery1 } from "./images/community/1.jpg";
+export { default as gallery2 } from "./images/community/2.jpg";
+export { default as gallery3 } from "./images/community/3.jpg";
+export { default as gallery4 } from "./images/community/4.jpg";
+export { default as gallery5 } from "./images/community/5.jpg";
+export { default as gallery6 } from "./images/community/6.jpg";
+export { default as gallery7 } from "./images/community/7.jpg";
+export { default as gallery8 } from "./images/community/8.jpg";
+export { default as gallery9 } from "./images/community/9.jpg";
+export { default as dummyImage } from "./images/dummy_profile.png";
+export { default as hkDashboard } from "./images/sidebar-icons/hk-dashboard.png";
+export { default as hkGoal_Statement } from "./images/sidebar-icons/hk-Goal_Statment.png";
+export { default as hkVault } from "./images/sidebar-icons/hk-Vault.png";
+export { default as hkPods } from "./images/sidebar-icons/hk-Pods.png";
+// export { default as demoLogo } from "./images/logoDemo.jpg";
+// export { default as demoLogo } from "./images/Parrot_Logo.png";
+export { default as demoLogo } from "./images/LogoSidee.png";
+export { default as product1 } from "./images/Yatchs/p9.jpg";
+export { default as product2 } from "./images/Yatchs/p6.jpg";
+export { default as product3 } from "./images/Yatchs/p3.jpg";
+export { default as y1 } from "./images/Yatchs/y1.png";
+export { default as y2 } from "./images/Yatchs/y2.jpg";
+export { default as y3 } from "./images/Yatchs/y3.jpg";
+
+// community

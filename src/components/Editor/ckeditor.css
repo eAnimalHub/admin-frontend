@@ -1,0 +1,23 @@
+.ck.ck-editor__editable > .ck-placeholder::before {
+  color: grey;
+  font-family: sans-serif;
+  font-size: 14px;
+}
+
+.ck.ck-reset .ck-dropdown__panel {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.ck .ck-content {
+  height: 400px;
+}
+
+.ck.ck-reset .ck-dropdown__panel li > button > span {
+  font-size: 12px !important;
+}
+
+.ck-rounded-corners .ck.ck-balloon-panel,
+.ck.ck-balloon-panel .ck-rounded-corners {
+  z-index: 10000;
+}
