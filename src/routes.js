@@ -99,8 +99,8 @@ import AddAnimalCategory from "./pages/AnimalCategory/AddCategory";
 import { PrivacyPolicy } from "./components/PrivacyPolicy";
 import { TermsAndCondition } from "./components/TermsAndCondition";
 import { AboutUs } from "./components/AboutUs";
-import ReportList from "./pages/Report/ReportList";
 import ReportingList from "./pages/Report/ReportingList";
+import ReportingDetail from "./pages/Report/ReportingDetail";
 
 // ----------------------------------------------------------------------
 const Authentication = () => {
@@ -132,6 +132,7 @@ export default function Router() {
         <Route path="/breed/add-breed" element={<AddBreed />} />
         <Route path="/Editprofile" element={<EditProfile />} />
         <Route path="/report" element={<ReportingList />} />
+        <Route path="/report/:id" element={<ReportingDetail />} />
       </Route>
       <Route element={<LogoOnlyLayout />}>
         <Route path="/about-us" element={<AboutUs />} />

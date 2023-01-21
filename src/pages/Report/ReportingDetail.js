@@ -3,7 +3,7 @@ import { Icon } from "@iconify/react";
 import { sentenceCase } from "change-case";
 import { useEffect, useState } from "react";
 import plusFill from "@iconify/icons-eva/plus-fill";
-import { Link as RouterLink, useNavigate } from "react-router-dom";
+import { Link as RouterLink, useNavigate, useParams } from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { get_root_value } from "src/utils/domUtils";
 // material
@@ -41,6 +41,7 @@ import { htmlDecode } from "src/utils/convertHtml";
 import { breedListingApi, deleteBreedApi } from "src/DAL/breedApi/BreedApi";
 import moment from "moment";
 import CustomConfirmation from "src/components/menuIcons/CustomConfirmation";
+import { reportDetailApi, reportListingApi } from "src/DAL/reportApi/reportApi";
 
 //
 // import USERLIST from "../_mocks_/user";
@@ -50,11 +51,12 @@ import CustomConfirmation from "src/components/menuIcons/CustomConfirmation";
 const TABLE_HEAD = [
   { id: "number", label: "#", alignRight: false },
   { id: "question", label: "Tilte", alignRight: false },
-  { id: "type", label: "Created At", alignRight: false },
-  { id: "category", label: "Category", alignRight: false },
-  { id: "is_popular", label: "Popular", alignRight: false },
+  { id: "type", label: "Description", alignRight: false },
+  { id: "type", label: "Admin Reply", alignRight: false },
+  { id: "typereport", label: "Report Type", alignRight: false },
+  { id: "created", label: "Created At", alignRight: false },
   { id: "status", label: "Status", alignRight: false },
-  { id: "action", label: "Action", alignRight: false },
+  // { id: "action", label: "Action", alignRight: false },
 ];
 
 // ----------------------------------------------------------------------
@@ -123,9 +125,10 @@ const useStyles = makeStyles(() => ({
     marginTop: "20%",
   },
 }));
-export default function BreedList() {
+export default function ReportingDetail() {
   const navigate = useNavigate();
   const classes = useStyles();
+  const params = useParams();
   const [page, setPage] = useState(0);
   const [order, setOrder] = useState("asc");
   const [selected, setSelected] = useState([]);
@@ -165,22 +168,23 @@ export default function BreedList() {
 
   const getBreedListing = async () => {
     try {
-      const result = await breedListingApi();
+      // const result = await breedListingApi();
+      const result = await reportDetailApi(params.id);
+
+      let report = [];
       setIsLoading(true);
       if (result.code === 200) {
-        //console.log(result, "result");
-        // setQuestionData(result.goal_statement);
-
-        const data = result.breed.map((breed) => {
+        report.push(result);
+        const data = report.map((breed) => {
+          console.log(breed, "breeeeeeeeeed");
           return {
-            id: breed._id,
-            name: breed.name,
-            createdAt: breed.createdAt,
-            status: breed.status,
-            popular: breed.is_popular,
-            breed_suggestion: breed.breed_suggestion,
-            image: breed.image,
-            category: breed?.category,
+            id: breed.data._id,
+            name: breed.data.reported_by.full_name,
+            description: breed.data.description,
+            adminReply: breed.data.admin_reply,
+            createdAt: breed.data.createdAt,
+            status: breed.data.status,
+            category: breed?.data.report_type,
           };
         });
         setUserList(data);
@@ -209,7 +213,7 @@ export default function BreedList() {
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
-
+  console.log(userList, "userList");
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
@@ -239,14 +243,9 @@ export default function BreedList() {
   }, []);
   const MENU_OPTIONS = [
     {
-      label: "Edit",
+      label: "View",
       icon: "akar-icons:edit",
       handleClick: handleEdit,
-    },
-    {
-      label: "Delete",
-      icon: "ant-design:delete-twotone",
-      handleClick: handleAgreeDelete,
     },
   ];
   const isUserNotFound = filteredUsers.length === 0;
@@ -265,18 +264,21 @@ export default function BreedList() {
 
       <div className="container">
         <div className="row">
-          <div className="col-lg-8 col-sm-12">
-            <h2>Breed List</h2>
+          <div className="col-12">
+            <IconButton onClick={() => navigate(-1)}>
+              <ArrowBackIcon />
+            </IconButton>
           </div>
-          <div className="col-lg-4 col-sm-12 text-end">
+          <div className="col-lg-8 col-sm-12">
+            <h2>Report DEtail</h2>
+          </div>
+          {/* <div className="col-lg-4 col-sm-12 text-end">
             <button onClick={handleNavigate} className="small-contained-button">
               Add Breed
             </button>
-          </div>
+          </div> */}
         </div>
-        {/* <IconButton onClick={() => navigate(-1)}>
-          <ArrowBackIcon />
-        </IconButton> */}
+
         <Stack
           direction="row"
           alignItems="center"
@@ -310,8 +312,15 @@ export default function BreedList() {
                 {filteredUsers
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row, i) => {
-                    const { id, status, name, createdAt, category, popular } =
-                      row;
+                    const {
+                      id,
+                      status,
+                      name,
+                      createdAt,
+                      category,
+                      description,
+                      adminReply,
+                    } = row;
                     const isItemSelected = selected.indexOf(name) !== -1;
 
                     return (
@@ -340,20 +349,18 @@ export default function BreedList() {
                             <Typography variant="subtitle2">{name}</Typography>
                           </Stack>
                         </TableCell>
+                        <TableCell align="left">{description}</TableCell>
+                        <TableCell align="left">
+                          {adminReply ? adminReply : "N/A"}
+                        </TableCell>
+
+                        <TableCell align="left">
+                          {category ? category : "N/A"}
+                        </TableCell>
                         <TableCell align="left">
                           {moment(createdAt).format("DD-MM-YYYY")}
                         </TableCell>
-                        <TableCell align="left">
-                          {category ? category.name : "N/A"}
-                        </TableCell>
-                        <TableCell align="left">
-                          <Label
-                            variant="ghost"
-                            color={popular === false ? "error" : "success"}
-                          >
-                            {popular === false ? "No" : "Yes"}
-                          </Label>
-                        </TableCell>
+
                         <TableCell align="left">
                           <Label
                             variant="ghost"
@@ -362,10 +369,9 @@ export default function BreedList() {
                             {status === false ? "InActive" : "Active"}
                           </Label>
                         </TableCell>
-
-                        <TableCell align="left">
+                        {/* <TableCell align="left">
                           <CustomPopover menu={MENU_OPTIONS} data={row} />
-                        </TableCell>
+                        </TableCell> */}
                       </TableRow>
                     );
                   })}

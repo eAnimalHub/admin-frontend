@@ -123,6 +123,7 @@ export default function AddAnimalCategory() {
     description: "",
     image: {},
     status: true,
+    order: "",
   });
 
   const fileChangedHandler = (e) => {
@@ -190,6 +191,9 @@ export default function AddAnimalCategory() {
     const formData = new FormData();
     formData.append("name", inputs.name);
     formData.append("status", inputs.status);
+    if (params.id) {
+      formData.append("order", inputs.order);
+    }
     if (file) {
       formData.append("image", inputs.image);
     }
@@ -269,6 +273,19 @@ export default function AddAnimalCategory() {
             onChange={handleChange}
           />
         </div>
+        {formType !== "add" && (
+          <div className="col-lg-6 col-md-6 col-sm-12 mt-4">
+            <TextField
+              id="outlined-basic"
+              label="Order"
+              variant="outlined"
+              fullWidth
+              name="order"
+              value={inputs.order}
+              onChange={handleChange}
+            />
+          </div>
+        )}
 
         <div className="col-lg-6 col-md-6 col-sm-12 mt-4">
           <FormControl fullWidth required>

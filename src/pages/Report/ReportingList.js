@@ -134,7 +134,6 @@ export default function ReportingList() {
   const [filterName, setFilterName] = useState("");
   const [rowsPerPage, setRowsPerPage] = useState(50);
   const [open, setOpen] = useState(false);
-  const [questionData, setQuestionData] = useState([]);
   const [userList, setUserList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const { enqueueSnackbar } = useSnackbar();
@@ -149,7 +148,7 @@ export default function ReportingList() {
     setOpen(true);
   };
   const handleEdit = (value) => {
-    navigate(`/breed/edit-breed/${value.id}`, {
+    navigate(`/report/${value.id}`, {
       state: value,
     });
   };

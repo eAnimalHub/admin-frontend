@@ -7,6 +7,8 @@
   "scripts": {
     "start": "env-cmd -f .env.animal craco start",
     "build": "env-cmd -f .env.animal craco build",
+    "animal-prod": "env-cmd -f .env.animal-prod craco start",
+    "build-prod": "env-cmd -f .env.animal-prod craco build",
     "eject": "react-scripts eject",
     "test": "react-scripts test",
     "lint": "eslint --ext .js,.jsx ./src",
