@@ -98,7 +98,7 @@ export default function AccountPopover() {
     setUserData(userInfo);
     setProfileImage(s3baseUrl + userInfo?.profile_image);
   }, []);
-  //console.log(userInfo, "userInfouserInfouserInfouserInfo123456");
+  // console.log(userInfo, "userInfouserInfouserInfouserInfo123456");
   return (
     <>
       <ChangePassword
@@ -128,7 +128,7 @@ export default function AccountPopover() {
       >
         <Avatar
           className="top-avatar"
-          src={s3baseUrl + userInfo.image?.thumbnail_1}
+          src={s3baseUrl + userInfo?.profile_image}
           alt="photoURL"
         />
       </IconButton>

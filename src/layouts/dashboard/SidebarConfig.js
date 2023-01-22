@@ -43,7 +43,8 @@ import {
 } from "src/assets";
 import { project_name } from "src/config/config";
 import { useContentSetting } from "src/Hooks/ContentSettingState";
-
+import sharpPets from "@iconify/icons-ic/sharp-pets";
+import baselineReportGmailerrorred from "@iconify/icons-ic/baseline-report-gmailerrorred";
 // ----------------------------------------------------------------------
 const getIcon = (name) => <Icon icon={name} width={22} height={22} />;
 const getImageIcon = (name) => <img src={name} width={22} height={22} />;
@@ -59,17 +60,17 @@ let sidebarConfig = ({ recording_name = "", type }) => {
     {
       title: `Breeds`,
       path: "/breed",
-      icon: getIcon(shoppingBagFill),
+      icon: getIcon(sharpPets),
     },
     {
       title: `Categories`,
       path: "/categories",
-      icon: getIcon(shoppingBagFill),
+      icon: getIcon(barchartfill),
     },
     {
       title: `Report`,
       path: "/report",
-      icon: getIcon(shoppingBagFill),
+      icon: getIcon(baselineReportGmailerrorred),
     },
   ];
   return sidebarConfig;

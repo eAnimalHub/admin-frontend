@@ -16,14 +16,7 @@ import LoadingButton from "@mui/lab/LoadingButton";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useSnackbar } from "notistack";
 import { makeStyles } from "@material-ui/core/styles";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import Chip from "@mui/material/Chip";
-import { VaultListing } from "src/DAL/Vault/Vault";
-import Autocomplete from "@mui/material/Autocomplete";
-import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
-import LocalizationProvider from "@mui/lab/LocalizationProvider";
-import AdapterDateFns from "@mui/lab/AdapterDateFns";
-import Stack from "@mui/material/Stack";
+import Switch from "@mui/material/Switch";
 import moment from "moment";
 import DeleteIcon from "@mui/icons-material/Delete";
 
@@ -124,6 +117,7 @@ export default function AddAnimalCategory() {
     image: {},
     status: true,
     order: "",
+    is_popular: true,
   });
 
   const fileChangedHandler = (e) => {
@@ -191,6 +185,7 @@ export default function AddAnimalCategory() {
     const formData = new FormData();
     formData.append("name", inputs.name);
     formData.append("status", inputs.status);
+    formData.append("is_popular", inputs.is_popular);
     if (params.id) {
       formData.append("order", inputs.order);
     }
@@ -218,6 +213,12 @@ export default function AddAnimalCategory() {
     const value = event.target.value;
     setInputs((values) => ({ ...values, [name]: value }));
   };
+  const handleSwitch = (event) => {
+    setInputs((values) => ({
+      ...values,
+      ["is_popular"]: event.target.checked,
+    }));
+  };
 
   React.useEffect(() => {
     if (state !== null) {
@@ -227,7 +228,6 @@ export default function AddAnimalCategory() {
     }
   }, []);
   //   ////console.log(typeof audioFile, "values of audio to be send ");
-  ////console.log(programList, "programListprogramList");
 
   if (isLoading === true) {
     return <CircularProgress className={classes.loading} color="primary" />;
@@ -302,6 +302,14 @@ export default function AddAnimalCategory() {
               <MenuItem value={false}>Inactive</MenuItem>
             </Select>
           </FormControl>
+        </div>
+        <div className="col-lg-12 col-md-12 col-sm-12 mt-4">
+          Is Popular :
+          <Switch
+            checked={inputs.is_popular}
+            onChange={handleSwitch}
+            inputProps={{ "aria-label": "controlled" }}
+          />
         </div>
 
         <div className="col-lg-12 col-md-12 col-sm-12 mt-4">

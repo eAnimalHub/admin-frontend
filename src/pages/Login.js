@@ -93,6 +93,7 @@ export default function Login() {
       enqueueSnackbar(result.message, { variant: "success" });
       localStorage.setItem(`Admin`, "Admin");
       localStorage.setItem(`user`, JSON.stringify(result.customer));
+      handleSetUserInfo(result.customer);
       localStorage.setItem(`token`, result.token);
       navigate("/dashboard", { replace: true });
       setLoading(false);

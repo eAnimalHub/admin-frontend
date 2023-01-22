@@ -26,6 +26,7 @@ import { _get_user_from_localStorage } from "src/DAL/localstorage/LocalStorage";
 import { EditProfileApi, GetProfileApi } from "src/DAL/Profile/Profile";
 import { useContentSetting } from "src/Hooks/ContentSettingState";
 import { TimeZones } from "src/utils/constants";
+import { editProfileApi } from "src/DAL/Dashboard/DashboardApi";
 
 const Input = styled("input")({
   display: "none",
@@ -49,84 +50,19 @@ function EditProfile(props) {
   const [previews, setPreviews] = useState("");
   const [open, setOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [apimage, setApiImage] = useState("");
+  const [adminData, setAdminData] = useState();
   const [file, setProfileImage] = React.useState({});
   const [imageStatus, setImageStatus] = useState(false);
   const [editStatus, setEditStatus] = useState(false);
   const [userProfile, setUserProfile] = useState();
   const [memberData, setMemberData] = useState({
-    address: "",
-    biography: "",
-    city: "",
     contact_number: "",
-    email: "",
     first_name: "",
-    image: "",
     last_name: "",
-    main_heading: "",
-    state: "",
-    status: "",
-    team_type: "",
-    time_zone: "",
+    email: "",
+    profile_image: {},
+    status: true,
   });
-
-  // const options = useMemo(() => countryList().getData(), []);
-  // const user_profile = _get_user_from_localStorage();
-  const {
-    address,
-    biography,
-    city,
-    contact_number,
-    email,
-    image,
-    first_name,
-    last_name,
-    main_heading,
-    state,
-    status,
-    team_type,
-    time_zone,
-    _id,
-  } = userInfo;
-
-  const handleChangeDate = (event) => {
-    setMemberData((prevState) => {
-      return {
-        ...prevState,
-        dob: event,
-      };
-    });
-  };
-  const consultantProfile = async () => {
-    const result = await "";
-    if (result.code === 200) {
-      localStorage.setItem("admin_time_zone", JSON.stringify(result.time_zone));
-      setUserProfile(result.consultant);
-      handleSetUserInfo(result.consultant);
-      setMemberData(result.consultant);
-      // setUserInfo(result.consultant);
-    }
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  // const updateProfile = async () => {
-  //   const result = await EditProfileApi();
-  //   if (result.code === 200) {
-  //     setMemberData(result.member);
-  //     setIsLoading(false);
-  //   } else {
-  //     enqueueSnackbar(result.message, { variant: "error" });
-  //     setIsLoading(false);
-  //   }
-  // };
-  // console.log(memberData, "memberDatamemberDatamemberData");
 
   const handleUpdate = async (e) => {
     e.preventDefault();
@@ -135,60 +71,35 @@ function EditProfile(props) {
     var dateString = moment(memberData.dob).format("YYYY-MM-DD");
     formData.append("first_name", memberData.first_name);
     formData.append("last_name", memberData.last_name);
-    formData.append("email", memberData.email);
-    formData.append("city", memberData.city);
-    // formData.append("password", memberData.password);
-    // formData.append("zip_code", memberData.zip_code);
-    formData.append("time_zone", memberData.time_zone);
-    formData.append("state", memberData.state);
-    // formData.append("country", memberData.country);
-    formData.append("address", memberData.address);
-    // formData.append("main_heading", memberData.main_heading);
-    // formData.append("team_type", memberData.team_type);
-    // formData.append("facebook_link", memberData.facebook_link);
-    // formData.append("website_link", memberData.website_link);
-    // formData.append("instagram_link", memberData.instagram_link);
-    // formData.append("linkedin_link", memberData.linkedin_link);
-    // formData.append("youtube_link", memberData.youtube_link);
-    formData.append("biography", memberData.biography);
     formData.append("contact_number", memberData.contact_number);
-    // formData.append(
-    //   "nineteen_day_plan_currency",
-    //   memberData.nineteen_day_plan_currency
-    // );
-    // formData.append("dob", dateString);
+    formData.append("status", memberData.status);
+
     if (imageStatus === true) {
       formData.append("image", file);
     }
-    const result = await "";
+    const result = await editProfileApi(adminData.user_id._id, formData);
     if (result.code === 200) {
       setEditStatus(true);
-      setUserInfo(result.consultant);
-      localStorage.setItem(`user_data`, JSON.stringify(result.consultant));
+      setUserInfo(result.adminUser);
+      localStorage.setItem(`user`, JSON.stringify(result.adminUser));
       enqueueSnackbar(result.message, { variant: "success" });
     } else {
       enqueueSnackbar(result.message, { variant: "error" });
     }
     setIsLoading(false);
   };
-  const handleUploadFile = (e) => {
-    setProfileImage(e.target.files[0]);
-  };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    console.log(value, "value of edit profile");
     setMemberData((prevState) => {
       return {
         ...prevState,
         [name]: value,
       };
     });
-    console.log(memberData, "memberData ");
   };
 
   const handleUpload = (event) => {
-    console.log(event, "event");
     setImageStatus(true);
     // setImage(event.target.files[0]);
     setProfileImage(event.target.files[0]);
@@ -197,17 +108,22 @@ function EditProfile(props) {
   };
 
   useEffect(() => {
-    setMemberData(userInfo);
-  }, []);
-  useEffect(() => {
-    consultantProfile();
+    const userData = JSON.parse(localStorage.getItem("user"));
+    setAdminData(userData);
+    setMemberData(() => ({
+      ...memberData,
+      ["first_name"]: userData.first_name,
+      ["last_name"]: userData.last_name,
+      ["email"]: userData.user_id.email,
+      ["contact_number"]: userData.contact_number,
+      ["status"]: userData.status,
+      ["profile_image"]: userData.profile_image,
+    }));
   }, []);
 
-  console.log(memberData, "memberData.time_zone");
   if (isLoading) {
     return <CircularProgress className={classes.loading} color="primary" />;
   }
-  console.log(userInfo, "userInfouserInfouserInfo1122");
   return (
     <div className="container ">
       <form onSubmit={handleUpdate}>
@@ -215,7 +131,13 @@ function EditProfile(props) {
           <div className="cards-edit p-4">
             <div className=" image d-flex flex-column justify-content-center align-items-center">
               <div className="edit-profile-icon">
-                <img src="" height="100" width="100" />
+                <img
+                  src={
+                    previews ? previews : s3baseUrl + memberData.profile_image
+                  }
+                  height="100"
+                  width="100"
+                />
                 <label htmlFor="icon-button-file">
                   <Input
                     accept="image/*"
@@ -281,21 +203,6 @@ function EditProfile(props) {
                   </div>
                 </div>
 
-                {/* <div className="col-lg-6 col-md-6 col-sm-12">
-                  <div className="mt-4">
-                    <TextField
-                      id="outlined-basic"
-                      label="Password"
-                      variant="outlined"
-                      fullWidth
-                      size="small"
-                      value={memberData.password}
-                      name="password"
-                      onChange={(e) => handleChange(e)}
-                      required
-                    />
-                  </div>
-                </div> */}
                 <div className="col-lg-6 col-md-6 col-sm-12">
                   <div className="mt-4">
                     <TextField
@@ -310,8 +217,26 @@ function EditProfile(props) {
                     />
                   </div>
                 </div>
+                <div className="col-lg-6 col-md-6 col-sm-12 mt-4">
+                  <FormControl fullWidth required>
+                    <InputLabel id="demo-simple-select-label">
+                      Status
+                    </InputLabel>
+                    <Select
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
+                      name="status"
+                      value={memberData.status}
+                      label="Status"
+                      onChange={handleChange}
+                    >
+                      <MenuItem value={true}>Active</MenuItem>
+                      <MenuItem value={false}>Inactive</MenuItem>
+                    </Select>
+                  </FormControl>
+                </div>
 
-                <div className="col-lg-6 col-md-6 col-sm-12">
+                {/* <div className="col-lg-6 col-md-6 col-sm-12">
                   <div className="mt-4">
                     <TextField
                       id="outlined-basic"
@@ -325,189 +250,9 @@ function EditProfile(props) {
                       required={true}
                     />
                   </div>
-                </div>
-                <div className="col-lg-6 col-md-6 col-sm-12">
-                  <div className="mt-4">
-                    <TextField
-                      id="outlined-basic"
-                      label="City"
-                      variant="outlined"
-                      fullWidth
-                      size="small"
-                      value={memberData.city}
-                      name="city"
-                      onChange={(e) => handleChange(e)}
-                      required={true}
-                    />
-                  </div>
-                </div>
-                {/* <div className="col-lg-6 col-md-6 col-sm-12">
-                  <div className="mt-4">
-                    <TextField
-                      id="outlined-basic"
-                      label="Main Heading"
-                      variant="outlined"
-                      fullWidth
-                      size="small"
-                      value={memberData.main_heading}
-                      name="main_heading"
-                      onChange={(e) => handleChange(e)}
-                      required={true}
-                    />
-                  </div>
-                </div> */}
-                <div className="col-lg-6 col-md-6 col-sm-12">
-                  <div className="mt-4">
-                    <TextField
-                      id="outlined-basic"
-                      label="State/County"
-                      variant="outlined"
-                      fullWidth
-                      size="small"
-                      value={memberData.state}
-                      name="state"
-                      onChange={(e) => handleChange(e)}
-                      required={true}
-                    />
-                  </div>
-                </div>
-                {/* <div className="col-lg-6 col-md-6 col-sm-12">
-                  <FormControl variant="outlined" className="mt-3" fullWidth>
-                    <InputLabel id="demo-simple-select-outlined-label">
-                      Status
-                    </InputLabel>
-                    <Select
-                      labelId="demo-simple-select-outlined-label"
-                      id="demo-simple-select-outlined"
-                      value={memberData.status}
-                      onChange={(e) => handleChange(e)}
-                      label="Status"
-                      name="status"
-                      className="svg-color"
-                      MenuProps={{
-                        classes: {
-                          paper: classes.paper,
-                        },
-                      }}
-                      sx={{
-                        color: get_root_value("--input-text-color"),
-                      }}
-                    >
-                      <MenuItem value="true">
-                        <em>Active</em>
-                      </MenuItem>
-                      <MenuItem value="false">
-                        <em>Inactive</em>
-                      </MenuItem>
-                    </Select>
-                  </FormControl>
-                </div> */}
-                {/* <div className="col-lg-6 col-md-6 col-sm-12">
-                  <FormControl variant="outlined" className="mt-3" fullWidth>
-                    <InputLabel id="demo-simple-select-outlined-label">
-                      Team Type
-                    </InputLabel>
-                    <Select
-                      labelId="demo-simple-select-outlined-label"
-                      id="demo-simple-select-outlined"
-                      value={memberData.team_type}
-                      onChange={(e) => handleChange(e)}
-                      label="Team Type"
-                      name="team_type"
-                      className="svg-color"
-                      MenuProps={{
-                        classes: {
-                          paper: classes.paper,
-                        },
-                      }}
-                      sx={{
-                        color: get_root_value("--input-text-color"),
-                      }}
-                    >
-                      <MenuItem value="consultant">
-                        <em>Save As Consultant</em>
-                      </MenuItem>
-                      <MenuItem value="team">
-                        <em>Save As Team</em>
-                      </MenuItem>
-                      <MenuItem value="both">
-                        <em>Both</em>
-                      </MenuItem>
-                    </Select>
-                  </FormControl>
                 </div> */}
 
-                <div className="col-lg-6 col-md-6 col-sm-12">
-                  <div className="mt-4">
-                    <FormControl fullWidth>
-                      <InputLabel id="demo-simple-select-label">
-                        Timezone
-                      </InputLabel>
-                      <Select
-                        MenuProps={{
-                          classes: {
-                            paper: classes.paper,
-                          },
-                        }}
-                        className="svg-color"
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        value={memberData.time_zone}
-                        name="time_zone"
-                        label="Timezone"
-                        onChange={handleChange}
-                        size="small"
-                        sx={{
-                          color: get_root_value("--input-text-color"),
-                        }}
-                      >
-                        {TimeZones.map((value, i) => {
-                          return <MenuItem value={value}>{value}</MenuItem>;
-                        })}
-                      </Select>
-                    </FormControl>
-                  </div>
-                </div>
-
-                {/* <div className="col-lg-6 col-md-6 col-sm-12">
-                  <div className="mt-4">
-                    <FormControl sx={{ minWidth: 120 }} fullWidth>
-                      <InputLabel id="demo-controlled-open-select-label">
-                        Currency for 90 Day Tracker
-                      </InputLabel>
-                      <Select
-                        MenuProps={{
-                          classes: {
-                            paper: classes.paper,
-                          },
-                        }}
-                        className="svg-color"
-                        labelId="demo-controlled-open-select-label"
-                        id="demo-controlled-open-select"
-                        open={open}
-                        onClose={handleClose}
-                        onOpen={handleOpen}
-                        value={memberData.nineteen_day_plan_currency}
-                        name="nineteen_day_plan_currency"
-                        label="Currency for 90 Day Tracker"
-                        onChange={(e) => handleChange(e)}
-                        size="small"
-                        sx={{
-                          color: get_root_value("--input-text-color"),
-                        }}
-                      >
-                        <MenuItem value="">
-                          <em>Select</em>
-                        </MenuItem>
-                        <MenuItem value="eur">Euro</MenuItem>
-                        <MenuItem value="gbp">Pond</MenuItem>
-                        <MenuItem value="usd">Dollar</MenuItem>
-                      </Select>
-                    </FormControl>
-                  </div>
-                </div> */}
-
-                <div className="col-lg-12 col-md-12 col-sm-12">
+                {/* <div className="col-lg-12 col-md-12 col-sm-12">
                   <div className="mt-4 textarea-block">
                     <TextField
                       id="outlined-basic"
@@ -528,38 +273,7 @@ function EditProfile(props) {
                       Maximum limit 500 characters
                     </FormHelperText>
                   </div>
-                </div>
-
-                {/* <div className="col-lg-6 col-md-6 col-sm-12">
-              <div className="mt-3">
-                <span className="upload-button mt-3">
-                  <input
-                    color="primary"
-                    accept="image/*"
-                    type="file"
-                    id="icon-button-file"
-                    style={{ display: "none" }}
-                    onChange={handleUpload}
-                  />
-                  <label htmlFor="icon-button-file" className="w-100">
-                    <CloudUploadIcon />
-                  </label>
-                </span>
-              </div>
-            </div> */}
-                {/* <div className="col-lg-6 col-md-6 col-sm-12">
-              <div className="mt-3">
-                {previews &&
-                  previews.map((file, index) => (
-                    <div className="col-3 mt-3" key={index}>
-                      <div className="preview">
-                        <span onClick={() => handleRemove(index)}>x</span>
-                        <img src={file} />
-                      </div>
-                    </div>
-                  ))}
-              </div>
-            </div> */}
+                </div> */}
               </div>
 
               <div className="mt-2 ms-auto">

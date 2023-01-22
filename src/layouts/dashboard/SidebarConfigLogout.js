@@ -20,29 +20,8 @@ import {
   _get_admin_time_zone_localStorage,
   get_project_info_localStorage,
 } from "src/DAL/localstorage/LocalStorage";
-import MusicVideoIcon from "@mui/icons-material/MusicVideo";
-import videoFill from "@iconify/icons-eva/video-fill";
-import yachtIcon from "@iconify/icons-fontisto/yacht";
-import {
-  DashboardIcons,
-  RecordingIcons,
-  AffirmationIcons,
-  GoalStatmentIcons,
-  GratitudeIcons,
-  MemoriesIcons,
-  PodsIcons,
-  ProfileIcons,
-  ProgrammeIcons,
-  QuotesIcons,
-  VaultIcons,
-  DayPlanIcons,
-  hkDashboard,
-  hkGoal_Statement,
-  hkVault,
-  hkPods,
-} from "src/assets";
-import { project_name } from "src/config/config";
-import { useContentSetting } from "src/Hooks/ContentSettingState";
+import outlinePrivacyTip from "@iconify/icons-ic/outline-privacy-tip";
+import outlinePolicy from "@iconify/icons-ic/outline-policy";
 
 // ----------------------------------------------------------------------
 const getIcon = (name) => <Icon icon={name} width={22} height={22} />;
@@ -59,12 +38,12 @@ let sidebarConfigLogout = ({ recording_name = "", type }) => {
     {
       title: "Terms & Condition",
       path: "/terms",
-      icon: getIcon(personFill),
+      icon: getIcon(outlinePolicy),
     },
     {
       title: `Privacy & Policy`,
       path: "/privacy",
-      icon: getIcon(personFill),
+      icon: getIcon(outlinePrivacyTip),
     },
   ];
   return sidebarConfigLogout;

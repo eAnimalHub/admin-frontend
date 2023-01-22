@@ -222,12 +222,23 @@ const AnimalCategoryList = () => {
                         {value.description}
                       </p>
                       <div className="row recording-card-date">
-                        <div className="col-8 card-button recording-card-date-position">
+                        <div className="col-6 card-button recording-card-date-position">
                           <p className="pods-active-members">
                             <span> Post Status </span>
                           </p>
                         </div>
-                        <div className="col-4 text-end ms-auto">
+                        <div className="col-2 text-end pe-0">
+                          {/* <div className="col-12 text-end mb-3"> */}
+                          {value.is_popular == true ? (
+                            <button className="small-contained-chip-success">
+                              Popular
+                            </button>
+                          ) : (
+                            ""
+                          )}
+                          {/* </div> */}
+                        </div>{" "}
+                        <div className="col-4 text-end ">
                           {/* <div className="col-12 text-end mb-3"> */}
                           {value.status == true ? (
                             <button className="small-contained-chip-success">

@@ -130,7 +130,7 @@ export default function Router() {
           element={<AddAnimalCategory />}
         />
         <Route path="/breed/add-breed" element={<AddBreed />} />
-        <Route path="/Editprofile" element={<EditProfile />} />
+        <Route path="/edit-profile" element={<EditProfile />} />
         <Route path="/report" element={<ReportingList />} />
         <Route path="/report/:id" element={<ReportingDetail />} />
       </Route>
