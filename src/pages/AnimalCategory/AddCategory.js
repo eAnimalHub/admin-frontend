@@ -118,6 +118,7 @@ export default function AddAnimalCategory() {
     status: true,
     order: "",
     is_popular: true,
+    suggession: "",
   });
 
   const fileChangedHandler = (e) => {
@@ -186,6 +187,7 @@ export default function AddAnimalCategory() {
     formData.append("name", inputs.name);
     formData.append("status", inputs.status);
     formData.append("is_popular", inputs.is_popular);
+    formData.append("suggession", inputs.suggession);
     if (params.id) {
       formData.append("order", inputs.order);
     }
@@ -270,6 +272,17 @@ export default function AddAnimalCategory() {
             fullWidth
             name="description"
             value={inputs.description}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="col-lg-6 col-md-6 col-sm-12 mt-4">
+          <TextField
+            id="outlined-basic"
+            label="Suggestion"
+            variant="outlined"
+            fullWidth
+            name="suggession"
+            value={inputs.suggession}
             onChange={handleChange}
           />
         </div>
